@@ -40,6 +40,19 @@ resource "aws_instance" "ec2_anakdevops" {
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id
   vpc_security_group_ids = [data.terraform_remote_state.security_groups.outputs.security_group_id]
   
+
+  provisioner "file" {
+    source      = "../security_groups/keypair_anakdevops.pem"
+    destination = "/tmp/keypair_anakdevops.pem"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("../security_groups/keypair_anakdevops.pem")
+      host        = self.public_ip
+    }
+  }
+
   tags = {
     Name = "ec2_anakdevops-${count.index}"
   }
