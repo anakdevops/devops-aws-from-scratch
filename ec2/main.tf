@@ -13,10 +13,6 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-# Define S3 bucket resource first
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "bucketpython435we"
-}
 
 # Retrieve security group IDs
 data "terraform_remote_state" "security_groups" {
@@ -24,6 +20,15 @@ data "terraform_remote_state" "security_groups" {
 
   config = {
     path = "../security_groups/terraform.tfstate"
+  }
+}
+
+# Retrieve security group IDs
+data "terraform_remote_state" "my_bucket" {
+  backend = "local"
+
+  config = {
+    path = "../s3/terraform.tfstate"
   }
 }
 
@@ -48,7 +53,7 @@ resource "aws_instance" "ec2_anakdevops" {
               sudo chown root:root /etc/passwd-s3fs
               sudo chmod 600 /etc/passwd-s3fs
               sudo mkdir -p /mnt/s3-bucket
-              echo "s3fs#${aws_s3_bucket.my_bucket.bucket} /mnt/s3-bucket fuse _netdev,allow_other 0 0" | sudo tee -a /etc/fstab
+              echo "s3fs#${data.terraform_remote_state.my_bucket.outputs.bucket_name} /mnt/s3-bucket fuse _netdev,allow_other 0 0" | sudo tee -a /etc/fstab
               sudo systemctl daemon-reload
               sudo mount -a
               sudo mkdir -p /usr/local/lib/docker/cli-plugins
