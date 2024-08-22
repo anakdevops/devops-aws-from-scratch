@@ -1,6 +1,6 @@
 ```
 cp terraform.tfvars.example terraform.tfvars
-pastikan anda punya { access_key secret_key } dan masukan ke terrafrm.tfvars
+pastikan anda punya { access_key secret_key } dan masukan ke file terraform.tfvars
 ```
 
 
