@@ -13,14 +13,6 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-# Data sources to fetch VPC and Security Group IDs
-data "terraform_remote_state" "vpc" {
-  backend = "local"
-
-  config = {
-    path = "../vpc/terraform.tfstate"
-  }
-}
 
 resource "tls_private_key" "rsa_4096" {
   algorithm = "RSA"
