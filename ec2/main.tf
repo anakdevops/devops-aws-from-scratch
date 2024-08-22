@@ -34,7 +34,7 @@ data "terraform_remote_state" "my_bucket" {
 
 # EC2 instances
 resource "aws_instance" "ec2_anakdevops" {
-  count                  = 1
+  count                  = 3
   ami                    = "ami-060e277c0d4cce553"
   instance_type          = "t2.micro"
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id
@@ -59,7 +59,9 @@ resource "aws_instance" "ec2_anakdevops" {
               sudo mkdir -p /usr/local/lib/docker/cli-plugins
               sudo curl -SL https://github.com/docker/compose/releases/download/v2.28.1/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose
               chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
-              cd /mnt/s3-bucket
+              mkdir -p ~/.ssh
+              echo "${data.terraform_remote_state.security_groups.outputs.key_public_key}" >> ~/.ssh/authorized_keys
+              chmod 600 ~/.ssh/authorized_keys
               EOF
 }
 
