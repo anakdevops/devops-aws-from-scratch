@@ -13,14 +13,7 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-# Data sources to fetch VPC and Security Group IDs
-data "terraform_remote_state" "vpc" {
-  backend = "local"
 
-  config = {
-    path = "../vpc/terraform.tfstate"
-  }
-}
 
 data "terraform_remote_state" "security_groups" {
   backend = "local"
@@ -35,7 +28,6 @@ resource "aws_instance" "ec2_anakdevops" {
   instance_type          = "t2.micro"
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id
   vpc_security_group_ids = [data.terraform_remote_state.security_groups.outputs.security_group_id]
-  subnet_id              = data.terraform_remote_state.vpc.outputs.subnet_id
 
   tags = {
     Name = "ec2_anakdevops"

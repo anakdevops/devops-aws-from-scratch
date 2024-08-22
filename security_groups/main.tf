@@ -38,7 +38,6 @@ resource "local_file" "private_key" {
 }
 
 resource "aws_security_group" "anakdevops_sg" {
-  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id  # Pastikan vpc_id sesuai
   name        = "anakdevops_sg"
   description = "Security group for EC2"
 
