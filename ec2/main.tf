@@ -13,8 +13,12 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
+# Define S3 bucket resource first
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "bucketpython435we"
+}
 
-
+# Retrieve security group IDs
 data "terraform_remote_state" "security_groups" {
   backend = "local"
 
@@ -23,14 +27,16 @@ data "terraform_remote_state" "security_groups" {
   }
 }
 
+# EC2 instances
 resource "aws_instance" "ec2_anakdevops" {
+  count                  = 1
   ami                    = "ami-060e277c0d4cce553"
   instance_type          = "t2.micro"
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id
   vpc_security_group_ids = [data.terraform_remote_state.security_groups.outputs.security_group_id]
-
+  
   tags = {
-    Name = "ec2_anakdevops"
+    Name = "ec2_anakdevops-${count.index}"
   }
 
   user_data = <<-EOF
@@ -52,6 +58,6 @@ resource "aws_instance" "ec2_anakdevops" {
               EOF
 }
 
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "bucketpython435we"
-}
+
+
+
