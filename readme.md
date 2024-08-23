@@ -1,3 +1,5 @@
+# RKE v 1.6.1 | Kubernetes v1.27.16
+
 ```
 cp terraform.tfvars.example terraform.tfvars
 pastikan anda punya { access_key secret_key } dan masukan ke file terraform.tfvars
