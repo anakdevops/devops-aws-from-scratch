@@ -3,15 +3,15 @@
 ```
 copy output disini
 ec2_private_ips = [
-  "172.31.34.155",
-  "172.31.43.25",
+  "172.31.24.231",
+  "172.31.23.94",
 ]
 ec2_public_ips = [
-  "13.214.213.67",
-  "52.77.233.1",
+  "18.141.140.50",
+  "13.229.67.48",
 ]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.214.213.67
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@52.77.233.1
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@18.141.140.50
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.229.67.48
 ```
 
 ```
@@ -34,12 +34,12 @@ echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKaxG21WvNCLktoU85xFg1hYTCrgKGvoXTrQ
 
 copy output disini
 ec2_private_ips = [
-  "172.31.47.92",
-  "172.31.32.109",
+  "172.31.24.231",
+  "172.31.23.94",
 ]
 ec2_public_ips = [
-  "18.143.156.165",
-  "54.255.231.144",
+  "18.141.140.50",
+  "13.229.67.48",
 ]
 ssh serverdevops@172.31.47.92
 ssh serverdevops@172.31.32.109
@@ -69,15 +69,13 @@ kubectl get nodes
 
 
 ```
-helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
 kubectl create namespace cattle-system
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.crds.yaml
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.13.2
-helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online --set letsEncrypt.ingress.class=nginx
-helm install rancher rancher-stable/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online --set letsEncrypt.ingress.class=nginx
+helm install rancher rancher-stable/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online
 kubectl -n cattle-system get deploy rancher
 ```
 
