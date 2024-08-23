@@ -54,7 +54,7 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.13.2
-helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.anakdevops.local
+helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online
 helm list --namespace cattle-system
 kubectl -n cattle-system get deploy rancher
 kubectl scale --replicas=1 deployment rancher -n cattle-system
