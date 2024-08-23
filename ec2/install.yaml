@@ -174,13 +174,13 @@
         create: yes
         block: |
           nodes:
-            - address: 10.0.0.2
+            - address: 172.31.34.155
               user: serverdevops
               role:
                 - controlplane
                 - etcd
                 - worker
-            - address: 10.0.0.3
+            - address: 172.31.34.155
               user: serverdevops
               role:
                 - controlplane
@@ -190,6 +190,7 @@
               plugin: canal
               options:
                 canal_flannel_backend_type: vxlan
+          kubernetes_version: "v1.27.16-rancher1-1"
     - name: Set owner and group for cluster.yml
       file:
         path: /home/serverdevops/cluster.yml

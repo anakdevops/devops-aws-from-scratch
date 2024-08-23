@@ -1,15 +1,23 @@
+# RKE v 1.6.1 | Kubernetes v1.27.16
+
 ```
 copy output disini
 ec2_private_ips = [
-  "172.31.47.92",
-  "172.31.32.109",
+  "172.31.34.155",
+  "172.31.43.25",
 ]
 ec2_public_ips = [
-  "18.143.156.165",
-  "54.255.231.144",
+  "13.214.213.67",
+  "52.77.233.1",
 ]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@18.143.156.165
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@54.255.231.144
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.214.213.67
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@52.77.233.1
+```
+
+```
+rke config -l
+rke -v
+rke config --list-version --all
 ```
 
 ```
@@ -21,7 +29,7 @@ cat /home/serverdevops/cluster.yml #pastikan file sudah ada
 ```
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEstK8UPmpBJkCLuFzgTiIjWe3p6wi6v/wMcp/aIVtUEso1fWSeIYV+G2YK7DcCr+RhmOZW7grDCoDiDYsWZ/o+7JzGirKZfUzjlavmIx48zqRn0I83ouCJvmcW+KCbLTf3ED8ZHzLM8liBz0RpAW5iP5cft9ZW5/QgCS+uCKnyCmXosRwZXjtQN3WpSwndAI10p/aZL4CSPRnYzM7e2pkM2kuodTB6zcxJFwsz3tUREOKGc0fdaf8wnJUJE8O43pla1ua3vCIrswwvwbzdasa9m6ZymzQO2sIWNfsn3XXXGb/1Q/BovhGQyvWl/GnStDeajPTz0cqFaKBt+IQX7jZ ansible-generated on ip-172-31-47-92" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVWvUfhRe+/7vP8GfaNipN3GL8lBzFXhgWCoimH+r35GIdK4s31726HPFurDeUm00KG6TCmUHzS4QnLRJ5X5iplz0/XE4amRuF3eFjzUSLCFu+1H6T3HR4S2saxP4hOeFOf/YadidvDHzWMguMdj3ygQ/S2xru6ChMZfBFLYSIQwz/aQ9Wpf/sUBxJfZsgi4UKBlK2eufjMKq29EbIjIWMDBiW5Uh3TE5C4TrwVwEX9cAGPGbbBddcF+t31gK9tq3tmeq0jg6F+WfRqyrOqZe8sM85wrcqrSNl8VgsRJV1lTdvCHkvMPCH0THfzyAQ9TK3OOv7sNKCdkyPzf0U1ugF ansible-generated on ip-172-31-34-155" >> ~/.ssh/authorized_keys #copy ke semua server
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKaxG21WvNCLktoU85xFg1hYTCrgKGvoXTrQ6tLsdGs/wG3C5skP9oNYfE9cyTTOmGgrZHT2GeZH0cfUB6I6vnlfpWdbRhsYT6TTXUjzrKfNr6XjTrzzeBNrP/vG4fprEhtUpkb7KBS0j6kGaxN1Q9i0VrgJmdbXOCniu90XL1MMaJ5AR1tfU1dlhChqImMqVd4Gyj6uRPN/bktWOjpQUbnH1KP2tVhxg6oUeyfAeOw+uV/HNg2dz3Q/nYTgbcJD+LMS6vp4UATH+NTzZCisxz7fjw1M2C7vlqrYWSUuVRRdWmvro2jdZqMVJKwtUK5bZoKqxLLRWu4+h+OYAoXPmh ansible-generated on ip-172-31-32-109" >> ~/.ssh/authorized_keys #copy ke semua server
 
 copy output disini
@@ -59,9 +67,6 @@ export KUBECONFIG=$HOME/kube_config_cluster.yml
 kubectl get nodes
 ```
 
-```
-reboot all server
-```
 
 ```
 helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
