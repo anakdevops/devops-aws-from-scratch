@@ -40,6 +40,10 @@ resource "aws_instance" "ec2_anakdevops" {
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id
   vpc_security_group_ids = [data.terraform_remote_state.security_groups.outputs.security_group_id]
   
+    root_block_device {
+    volume_size = 50
+    volume_type = "gp2"
+  }
 
   provisioner "file" {
     source      = "../security_groups/keypair_anakdevops.pem"

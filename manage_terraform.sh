@@ -26,11 +26,11 @@ terraform_apply() {
 
 # Plan Terraform in all directories
 terraform_plan "security_groups"
+terraform_apply "security_groups"
 terraform_plan "s3"
 terraform_plan "ec2"
 
 # Apply Terraform in all directories
-terraform_apply "security_groups"
 terraform_apply "s3"
 terraform_apply "ec2"
 

@@ -1,15 +1,15 @@
 ```
 copy output disini
 ec2_private_ips = [
-  "172.31.43.69",
-  "172.31.41.246",
+  "172.31.34.169",
+  "172.31.34.156",
 ]
 ec2_public_ips = [
-  "47.128.147.123",
-  "52.221.218.246",
+  "47.129.200.40",
+  "13.212.137.132",
 ]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.128.147.123
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@52.221.218.246
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.129.200.40
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.212.137.132
 ```
 
 ```
@@ -21,10 +21,10 @@ cat /home/serverdevops/cluster.yml #pastikan file sudah ada
 ```
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt0s0+seG32HAx0db9wRjA5dNcBc+kswpI3kuS+zXWqkL/yKbnJNUB9Qm/AMdhmVQWwJVGVth2ty5CTYpHjyo3CbTjA1M/QDGcUZOAPD02LCN3620zei2nM6w1+Xg7nIponwXxaPOudyDfqR0ahQSCSfkwVCZ43V68IbFrk9/rLbOj++I5T+ZUfCNY+c9oqiV5p9wX0PIheW9adpMFeXDTi5pdq0nHKb0x2ps3qfdmdo26oAZq3FNvCDM9N0JBlsf+pICdlnpETwAqdl1CUkTgez1j69n2iW5glhxWtVdhmrY8DuXcPJ+FbYtMpTSEy/8PSF7HtvyqJfN/ONo273rD ansible-generated on ip-172-31-43-69" >> ~/.ssh/authorized_keys #copy ke semua server
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCx/0+/Zy2OkijXiXg671cR5ubHLF/SrJDC5+ligpCFhq5StlQhqCd4ZRsuROihhCJAd5GGYtHWpcB6DzHF8bCbkCvtQiAXiHvPIHbnphbfX+p3Akke5PfGeKH83Wk9mcE+xC8QVRhg3gBwG55T1j29YN/jUWBLbJrlFXe893htv4MbWY98/y1rbsdVNrq8rvDHxKH68qxEn3sYq66UQZGxt4nqbIJIgBYHLQ84M5T8yoeCz9rqsuZTDkYbMR5k/U1WPmcF0HvHCUeBgI2H1k3EObQkqSjqQ1P+VxujPCPqT/qjzavE/APhtr4XuJNjDjNwn/ZhSDwsWxS/6UAT3CkZ ansible-generated on ip-172-31-41-246" >> ~/.ssh/authorized_keys #copy ke semua server
-ssh serverdevops@172.31.43.69
-ssh serverdevops@172.31.41.246
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDU2RiOmJbgs/6FJH5qBEskT7wCc3ry4swbKvnaGsuB3+rhqWsIDpZovA1d+VOz6X+v+U9Qx27l25BJgUXRlONGse7jL79sx2UP8U2ycV950p52ubCKX+tQ+Zk+Z/yjuu+VRtG0ILshcg+78s28c1hynkVri+XIFu36mTOR/Wim+FIttP3FmJyV9QeThsnrOelOHfLHKBSrKJpeBNBWmEHLIylr5X8aGFHlKJxO0MnuRQqK7TmjYY2bOPkCPocukyhkaau3NizdK9k5Sp2rMggTl0ZitMWidcVnaj6W4zOE/pUPVglYyD5RmAa3Wa81Rj4idcBAHJY2WRhI52BeLlMb ansible-generated on ip-172-31-34-169" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKW01xt3eJQWJK+pkIRe9oMxPZYPfoDu3L1ya9ZPULeIvhq5hvdh6ailiXU0tj5dQbfl9apUEG6xRh44+tF0arVLbSDpJGJ+eRPPccjdaoVJoagIjf8pPkLDlyO929K0BF2splDVoMpnlE/CcdjKAKpd1Oo3mCKR0dtH09p7F6dw7ZQExyPZVfrPFlePQHBwE3/7kJiFE/xlkVXqgjkTmnjM6TgfTzLJa4Da+ZpfIImCedZLR/ntic+g7I4sKbo+M1jI1pd3x0AR72I9zveRBBXB4oYuc5YUoG/vv9+VE7V/PanT+x3brzUQrzXUVYeP82zKv9cQtGxI6lsUObE2Qt ansible-generated on ip-172-31-34-156" >> ~/.ssh/authorized_keys #copy ke semua server
+ssh serverdevops@172.31.34.169
+ssh serverdevops@172.31.34.156
 ```
 
 ```
