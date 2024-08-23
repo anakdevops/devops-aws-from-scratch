@@ -60,25 +60,32 @@ kubectl get nodes
 ```
 
 ```
+reboot all server
+```
+
+```
 helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
 kubectl create namespace cattle-system
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.crds.yaml
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.13.2
-helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online
+helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online --set letsEncrypt.ingress.class=nginx
+helm install rancher rancher-stable/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online --set letsEncrypt.ingress.class=nginx
 kubectl -n cattle-system get deploy rancher
-kubectl scale --replicas=1 deployment rancher -n cattle-system #scale down
-kubectl -n cattle-system get deploy rancher -w
 ```
 
 ```
 troubleshoot
+kubectl scale --replicas=1 deployment rancher -n cattle-system #scale down
+kubectl -n cattle-system get deploy rancher -w
 sudo echo 1 > /proc/sys/vm/drop_caches
 helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --set webhook.timeoutSeconds=30
 kubectl get pods -n cert-manager
 kubectl get pods -n ingress-nginx
 kubectl get svc -n ingress-nginx
+kubectl get pods -n kube-system
 helm uninstall rancher --namespace cattle-system
 helm list --namespace cattle-system
 helm list --namespace cert-manager
