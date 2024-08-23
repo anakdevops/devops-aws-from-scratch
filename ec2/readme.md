@@ -1,29 +1,46 @@
 ```
+copy output disini
+ec2_private_ips = [
+  "172.31.43.69",
+  "172.31.41.246",
+]
+ec2_public_ips = [
+  "47.128.147.123",
+  "52.221.218.246",
+]
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.128.147.123
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@52.221.218.246
+```
+
+```
 pastikan ssh ke semua server
 sudo su
 cat /home/serverdevops/cluster.yml #pastikan file sudah ada
 ```
 
 ```
-ec2_private_ips = [
-  "172.31.38.98",
-  "172.31.36.170",
-]
-```
-
-
-```
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVhoO6jFflmcXBtr9ljHYbSQ/jywbJmtOH8UuU/rrTMszKuJ77ZxGSNBcWCfFelrkv5jmE+aprDpiLA2BKjJn9c7esovdQl7+5+IzWFo+UHCtJGmuyUB6ipmSxOCpnCWU5izegqDVS4T0gwmJWCycJbGViP+Zc9CqOfygfPQKwUuVayYRq/rnG+WIQEUndgZdXNjoCW/F9c555iNcrnLL3Zfc3kMD9cPcoruiQN7ZtDc7O6DzkLST/tz1QSQjvO23McLRy96krKZzkyVrfzgxjuDw6SVLNGvthmHvAM1i7iNFiEUvoyLLVYhLIEQiA8+YqFOLhkeK9w0n9428/7g/5 ansible-generated on ip-172-31-38-98" >> ~/.ssh/authorized_keys #copy ke semua server
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqg28Hun+pnt17LAkSB7lWlVfhpZCXACdgKjUs5aNap3DzfS7WaF9Id7H6IIbS74z7y396Im7dTRUzYjyMQU9oECnKBzHfzWoEy/4Mk8vE/1+H7/1YqwN25GaYWORFlTv14cksf09zdHBxBYqRvcuX1m7Wbm5COlFcKTBUibpONxOZhxru4WS/opGbbfQJf7kB9PCMaSyHjEmDJbJfv+QZVPDHvVOJpXN0hJDeqJurdyamTK5+Zp7bqiTAzSfuc19XojcY3gPSxupG2UOdlcVnkjbpzE/PRjMdfFa8IgkqTIBA5SSBe8SOf2IKjfKVaLdEefoGf6yn5PF1aOXu8puH ansible-generated on ip-172-31-36-170" >> ~/.ssh/authorized_keys #copy ke semua server
-ssh serverdevops@172.31.38.98
-ssh serverdevops@172.31.36.170
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt0s0+seG32HAx0db9wRjA5dNcBc+kswpI3kuS+zXWqkL/yKbnJNUB9Qm/AMdhmVQWwJVGVth2ty5CTYpHjyo3CbTjA1M/QDGcUZOAPD02LCN3620zei2nM6w1+Xg7nIponwXxaPOudyDfqR0ahQSCSfkwVCZ43V68IbFrk9/rLbOj++I5T+ZUfCNY+c9oqiV5p9wX0PIheW9adpMFeXDTi5pdq0nHKb0x2ps3qfdmdo26oAZq3FNvCDM9N0JBlsf+pICdlnpETwAqdl1CUkTgez1j69n2iW5glhxWtVdhmrY8DuXcPJ+FbYtMpTSEy/8PSF7HtvyqJfN/ONo273rD ansible-generated on ip-172-31-43-69" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCx/0+/Zy2OkijXiXg671cR5ubHLF/SrJDC5+ligpCFhq5StlQhqCd4ZRsuROihhCJAd5GGYtHWpcB6DzHF8bCbkCvtQiAXiHvPIHbnphbfX+p3Akke5PfGeKH83Wk9mcE+xC8QVRhg3gBwG55T1j29YN/jUWBLbJrlFXe893htv4MbWY98/y1rbsdVNrq8rvDHxKH68qxEn3sYq66UQZGxt4nqbIJIgBYHLQ84M5T8yoeCz9rqsuZTDkYbMR5k/U1WPmcF0HvHCUeBgI2H1k3EObQkqSjqQ1P+VxujPCPqT/qjzavE/APhtr4XuJNjDjNwn/ZhSDwsWxS/6UAT3CkZ ansible-generated on ip-172-31-41-246" >> ~/.ssh/authorized_keys #copy ke semua server
+ssh serverdevops@172.31.43.69
+ssh serverdevops@172.31.41.246
 ```
 
 ```
 cd /home/serverdevops/
-nano cluster.yml #sesuaikan ip
+nano cluster.yml #sesuaikan ip (hanya edit di server 1)
+```
+
+```
+cek di semua server
+docker --version
+docker compose version
+helm version
+```
+
+```
+jalankan di server 1
 rke up --config cluster.yml
 INFO[0176] Finished building Kubernetes cluster successfully
 export KUBECONFIG=$HOME/kube_config_cluster.yml
