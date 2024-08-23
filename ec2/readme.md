@@ -1,15 +1,15 @@
 ```
 copy output disini
 ec2_private_ips = [
-  "172.31.34.169",
-  "172.31.34.156",
+  "172.31.47.92",
+  "172.31.32.109",
 ]
 ec2_public_ips = [
-  "47.129.200.40",
-  "13.212.137.132",
+  "18.143.156.165",
+  "54.255.231.144",
 ]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.129.200.40
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.212.137.132
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@18.143.156.165
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@54.255.231.144
 ```
 
 ```
@@ -21,16 +21,22 @@ cat /home/serverdevops/cluster.yml #pastikan file sudah ada
 ```
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDU2RiOmJbgs/6FJH5qBEskT7wCc3ry4swbKvnaGsuB3+rhqWsIDpZovA1d+VOz6X+v+U9Qx27l25BJgUXRlONGse7jL79sx2UP8U2ycV950p52ubCKX+tQ+Zk+Z/yjuu+VRtG0ILshcg+78s28c1hynkVri+XIFu36mTOR/Wim+FIttP3FmJyV9QeThsnrOelOHfLHKBSrKJpeBNBWmEHLIylr5X8aGFHlKJxO0MnuRQqK7TmjYY2bOPkCPocukyhkaau3NizdK9k5Sp2rMggTl0ZitMWidcVnaj6W4zOE/pUPVglYyD5RmAa3Wa81Rj4idcBAHJY2WRhI52BeLlMb ansible-generated on ip-172-31-34-169" >> ~/.ssh/authorized_keys #copy ke semua server
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKW01xt3eJQWJK+pkIRe9oMxPZYPfoDu3L1ya9ZPULeIvhq5hvdh6ailiXU0tj5dQbfl9apUEG6xRh44+tF0arVLbSDpJGJ+eRPPccjdaoVJoagIjf8pPkLDlyO929K0BF2splDVoMpnlE/CcdjKAKpd1Oo3mCKR0dtH09p7F6dw7ZQExyPZVfrPFlePQHBwE3/7kJiFE/xlkVXqgjkTmnjM6TgfTzLJa4Da+ZpfIImCedZLR/ntic+g7I4sKbo+M1jI1pd3x0AR72I9zveRBBXB4oYuc5YUoG/vv9+VE7V/PanT+x3brzUQrzXUVYeP82zKv9cQtGxI6lsUObE2Qt ansible-generated on ip-172-31-34-156" >> ~/.ssh/authorized_keys #copy ke semua server
-ssh serverdevops@172.31.34.169
-ssh serverdevops@172.31.34.156
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEstK8UPmpBJkCLuFzgTiIjWe3p6wi6v/wMcp/aIVtUEso1fWSeIYV+G2YK7DcCr+RhmOZW7grDCoDiDYsWZ/o+7JzGirKZfUzjlavmIx48zqRn0I83ouCJvmcW+KCbLTf3ED8ZHzLM8liBz0RpAW5iP5cft9ZW5/QgCS+uCKnyCmXosRwZXjtQN3WpSwndAI10p/aZL4CSPRnYzM7e2pkM2kuodTB6zcxJFwsz3tUREOKGc0fdaf8wnJUJE8O43pla1ua3vCIrswwvwbzdasa9m6ZymzQO2sIWNfsn3XXXGb/1Q/BovhGQyvWl/GnStDeajPTz0cqFaKBt+IQX7jZ ansible-generated on ip-172-31-47-92" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKaxG21WvNCLktoU85xFg1hYTCrgKGvoXTrQ6tLsdGs/wG3C5skP9oNYfE9cyTTOmGgrZHT2GeZH0cfUB6I6vnlfpWdbRhsYT6TTXUjzrKfNr6XjTrzzeBNrP/vG4fprEhtUpkb7KBS0j6kGaxN1Q9i0VrgJmdbXOCniu90XL1MMaJ5AR1tfU1dlhChqImMqVd4Gyj6uRPN/bktWOjpQUbnH1KP2tVhxg6oUeyfAeOw+uV/HNg2dz3Q/nYTgbcJD+LMS6vp4UATH+NTzZCisxz7fjw1M2C7vlqrYWSUuVRRdWmvro2jdZqMVJKwtUK5bZoKqxLLRWu4+h+OYAoXPmh ansible-generated on ip-172-31-32-109" >> ~/.ssh/authorized_keys #copy ke semua server
+
+copy output disini
+ec2_private_ips = [
+  "172.31.47.92",
+  "172.31.32.109",
+]
+ec2_public_ips = [
+  "18.143.156.165",
+  "54.255.231.144",
+]
+ssh serverdevops@172.31.47.92
+ssh serverdevops@172.31.32.109
 ```
 
-```
-cd /home/serverdevops/
-nano cluster.yml #sesuaikan ip (hanya edit di server 1)
-```
 
 ```
 cek di semua server
@@ -38,6 +44,12 @@ docker --version
 docker compose version
 helm version
 ```
+
+```
+cd /home/serverdevops/
+nano cluster.yml #sesuaikan ip (hanya edit di server 1)
+```
+
 
 ```
 jalankan di server 1
@@ -55,10 +67,21 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.13.2
 helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=clusterkube.anakdevops.online
-helm list --namespace cattle-system
 kubectl -n cattle-system get deploy rancher
 kubectl scale --replicas=1 deployment rancher -n cattle-system #scale down
 kubectl -n cattle-system get deploy rancher -w
 ```
 
+```
+troubleshoot
+sudo echo 1 > /proc/sys/vm/drop_caches
+helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --set webhook.timeoutSeconds=30
+kubectl get pods -n cert-manager
+kubectl get pods -n ingress-nginx
+kubectl get svc -n ingress-nginx
+helm uninstall rancher --namespace cattle-system
+helm list --namespace cattle-system
+helm list --namespace cert-manager
+helm uninstall cert-manager --namespace cert-manager
+```
 
