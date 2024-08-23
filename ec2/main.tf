@@ -34,7 +34,7 @@ data "terraform_remote_state" "my_bucket" {
 
 # EC2 instances
 resource "aws_instance" "ec2_anakdevops" {
-  count                  = 3
+  count                  = 2
   ami                    = "ami-0497a974f8d5dcef8" #22.04.4 LTS (Jammy Jellyfish)
   instance_type          = "t2.large"
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id

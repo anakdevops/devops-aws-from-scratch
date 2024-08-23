@@ -1,19 +1,17 @@
-# RKE v 1.6.1 | Kubernetes v1.27.16
+# RKE v 1.6.1 | Kubernetes v1.27.16 | rancher v2.8.5
 
 ```
 copy output disini
 ec2_private_ips = [
-  "172.31.36.96",
-  "172.31.35.46",
-  "172.31.42.137",
+  "172.31.40.198",
+  "172.31.44.131",
 ]
 ec2_public_ips = [
-  "47.129.152.68",
-  "13.212.234.82",
-  "13.212.33.199",
+  "54.179.145.36",
+  "54.255.93.120",
 ]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.129.152.68
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.212.234.82
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@54.179.145.36
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@54.255.93.120
 ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.212.33.199
 ```
 
@@ -21,17 +19,17 @@ ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.212.33.199
 ```
 pastikan ssh ke semua server
 sudo su
-ll /home/serverdevops/cluster.yml #pastikan file sudah ada dan lanjutkan ke perintah berikut
 rke config -l
 rke -v
 rke config --list-version --all
+ll /home/serverdevops/cluster.yml #pastikan file sudah ada dan lanjutkan ke perintah berikut
 ```
 
 ```
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1gkAnEH+3qRXkhVIMfPYtQ+f+Bo3V0R8jeEEJKM82/+QghxWnK/YVTwMRXqdFuCzsYe1iuj81CUPQXA7iyjHOzhVDmphrtPSO0znKVIOu51c3mckCRAiFl3N2mLBbCsB6WLobhIcri/O1OnupdIOBdHzHCddLTaiJgfV0rraUmxVTwr1OiQq8hS3VQ63riZBx9eVs3Hmwlw8RGEHSQCfX6pl5pEJYFDlnD59t+dOYnVQ+piJMSlSBrHx9Oa29rsdt+l6aoHasea8XIeSuSJzQprEDGZsIZ5gEzPTeI1frdqopq/H/S27rK2aG2b7sMLMggeH81xZI94tsmbzgT2s7 ansible-generated on ip-172-31-36-96" >> ~/.ssh/authorized_keys #copy ke semua server
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAWEBQrCOwIwT8i/AAiWJ4Bd5WPAU5I1oeXGKRLZYu1jrFhiLk1ogygBk5mG1lVEoVOnOxKhEvCKEibfBnkMUNkBwvtKJXKp/yR6DoNxlVrUwPV7kEYOeu9oF4mJd//mcveGBrjP0VtWFWhV68je794PS/j4LW1RsTH10baYLYRGpTiY1N/tIaEbNr+J7XugfhF2smw3c0Wrr5qUAKirTU8z1hy+yNohv+tLYwUQwcrmslIWvNTkso80bI7Sm8N25al8RLcRNqsiuT5mYqrqVYiDcdTVp4Od2UyiCoGZmUS2N6hnp9jdjjOZoQk6PbWdpI48X1Tm/UOaHzNCHJLfPd ansible-generated on ip-172-31-35-46" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNEKAC0L3hQIDwMABZKT1gLe7uR9QynncHdV3GsPitp8gmPYZwgkVQjtu+eEaCi5mF/7RlgVZMSvv6voSF9A+okMqQS097gUJJ0HWSbH4MlMA7oadb2bXaMZyGxkqPS4wRNdHEQ04ki7aOSFT1+eHdYGA9EdzJJR4NOoSDwnfKH0E4dTeoviNCwbtrdSNbxQLZ7rOL5yAhdEiMdhoNLEt11EAjRGaD7obwuSO2ubz1tc/KbZM5sbYj4pfBbMHvhubtJkJ0BnjMsySUDzdZ/g5xcPKpdgTdBXBD4+UQyTaUeEMgFHWay1+gE/AxEuvk5pH0j4nrEiX3lPs6HTG4xMWZ ansible-generated on ip-172-31-40-198" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClYlhU9yhCZyK4JM4OEp1jnf8Xs/kksgFmXKEEvWhvxvUgnqUNRl4VEiimpBKTfuLpAe4IKN8zU4mGAnkq0eEbsW7QIvECNhU/OEyrMJsnIjP7rCRVXS3x/N8vJhUkokbL/ejmOhdT/pgCq7PVXEN9BuYIdlJOTBMshAwE9bLuNUzIHnea42VB4gvIbp20CUbTu1lsBQ3cfFRMW0ifPukqrtv67R4oth4pdi4AK8XaC2IfkfCkDUTnk12N1ILY/SyJHsFvBiNDTxYAzCfYbl3wcUIvwWa36j3YwJBO/GYgaAOYgT00i9Cqg1pUci46bkalzML5k1MWq8sW2HcZfHMv ansible-generated on ip-172-31-44-131" >> ~/.ssh/authorized_keys #copy ke semua server
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDK7sTYhcJNOZUa2U6o4ej4TVs8HWy47fKzfUjR+2INr2DOTQSGwnDYxb0cIfB4NHe4Kx/IXx4WmvTd8V7OTf3iyxbi2T6Yrxb1lX8EdkrplT1GtoSYr5dNd4+vBn4PwQA9vTNTNBfYVZRR84YW4+jf4ihxvaAnU0PmyXBBpy+rlOPgda25CadaA+Pc4RVNHl65M4psNQY3AovK62AkouvVxY2Rnch3+woG96MF9jN6qVo+tOkCwgGIpajKWRL0ke5hxwnm3cKRoMO0TZYaArtCi8qiYwmV2ZxIfEpZ6UJV6MAsxSpB9EPV9d812dVeV6g3KfaSn7vcdfNHwcOnNwYx ansible-generated on ip-172-31-42-137" >> ~/.ssh/authorized_keys #copy ke semua server
 
 copy output disini
@@ -74,8 +72,14 @@ kubectl get nodes
 
 ```
 jalankan di server 1
-sudo chmod +x /tmp/rancherdashboard.sh
-cd /tmp && ./rancherdashboard.sh &
+helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+kubectl create namespace cattle-system
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.crds.yaml
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.13.2
+helm install rancher rancher-stable/rancher --namespace cattle-system --set hostname=kube.anakdevops.online
+kubectl -n cattle-system get deploy rancher
 kubectl -n cattle-system get deploy rancher -w
 ```
 
@@ -96,5 +100,9 @@ helm uninstall rancher --namespace cattle-system
 helm list --namespace cattle-system
 helm list --namespace cert-manager
 helm uninstall cert-manager --namespace cert-manager
+kubectl get pods -n ingress-nginx
+kubectl get pods -n cert-manager
+kubectl get svc -n ingress-nginx
+kubectl get svc -n cert-manager
 ```
 

@@ -187,9 +187,9 @@
                 - etcd
                 - worker
           network:
-              plugin: canal
-              options:
-                canal_flannel_backend_type: vxlan
+            plugin: calico
+            calico_network_provider:
+              cloud_provider: aws
           kubernetes_version: "v1.27.16-rancher1-1"
     - name: Set owner and group for cluster.yml
       file:

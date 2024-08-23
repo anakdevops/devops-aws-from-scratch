@@ -1,4 +1,4 @@
-# RKE v 1.6.1 | Kubernetes v1.27.16
+# RKE v 1.6.1 | Kubernetes v1.27.16 | rancher v2.8.5
 
 ```
 cp terraform.tfvars.example terraform.tfvars
