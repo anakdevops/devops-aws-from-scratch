@@ -74,9 +74,13 @@ kubectl get nodes
 
 ```
 jalankan di server 1
-chmod +x /tmp/rancherdashboard.sh
+sudo chmod +x /tmp/rancherdashboard.sh
 cd /tmp && ./rancherdashboard.sh &
+kubectl -n cattle-system get deploy rancher -w
 ```
+
+
+
 
 ```
 troubleshoot
