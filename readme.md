@@ -3,6 +3,23 @@ cp terraform.tfvars.example terraform.tfvars
 pastikan anda punya { access_key secret_key } dan masukan ke file terraform.tfvars
 ```
 
+# init all folder
+
+```
+chmod +x init_terraform.sh
+./init_terraform.sh
+```
+
+# OR
+
+```
+cd {folder}
+terraform init
+```
+
+###########################################################
+
+
 
 # Create
 
