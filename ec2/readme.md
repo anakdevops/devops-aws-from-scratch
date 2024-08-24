@@ -3,15 +3,15 @@
 ```
 copy output disini
 ec2_private_ips = [
-  "172.31.39.11",
-  "172.31.44.115",
+  "172.31.42.95",
+  "172.31.45.146",
 ]
 ec2_public_ips = [
-  "47.129.249.57",
-  "13.229.55.139",
+  "13.212.218.25",
+  "47.129.165.231",
 ]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.129.249.57
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.229.55.139
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.212.218.25
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.129.165.231
 ```
 
 
@@ -27,8 +27,8 @@ ll /home/serverdevops/cluster.yml #pastikan file sudah ada dan lanjutkan ke peri
 ```
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXAZViTioL1MTFrVLP4oByvd/9jWoaTYeUtEJvrgH49fgZNIQJAiCm9K95r6e0GU+DB62eMaDbn16vk8kd3Dtw/2CJT1KvGRDBzI2R6NuiBf9pQiZDLq7iLHmhpEbqG8UwH+xH3PJqomJ6hzqqitXyMRq4NpcdHXeJfhIfBc0xoX2tvpqeXwYdV+Q9Kaca1www4CdoeFNUfKEVI/4sPggbxcw+9yTzxsgTy85l5+3PDjIPUZOb8elK+d+Yqt60RPWMSY/IRRlhEOaKQInTocUoTsy8DM+Tej17Km8XWR9hubPy3AfvaD5JpUGW9R8/bsKz3VuZEF1VyoQkawjRuLq7 ansible-generated on ip-172-31-39-11" >> ~/.ssh/authorized_keys #copy ke semua server
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkKnTHZONa0hk5s884PAaHzfh4Qx79EQ0ekdY2UthqeosZBdOIqRhc5lIRw/CAMQzDZprGP3WEiXcD6aYAnxDGJCuhpFLrwOe3HOfOhIL2B/uTRHaVP7E09r3x/+eJ9LaSZk/KLwnykvL7y57uujRq05219G8+OxLjD7SU+4ClfygdA1XOZf0iSmaNHGcJ4+4HD1Rh7E962PpOA5lbQjSAt9qgHPZZisQhWwWyGudjwLfwumX2ksVH3yN8mKgR5OLAIe/xWNy9XBN1igxbp4B9JJayJnKLfI9coeBoJx8tIJEjUHUsWvb1syWnvPDOqS//gfSz/JN+UEkRn4ep+fbN ansible-generated on ip-172-31-44-115" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZonKwnYWmFI3d6+3kY9sp3U5ZXGd9WR/UN3ZAqa0tKzJG1rhFFFfN7smNjbh0kXTdqHADYZby9Hq6p7ygq02Rm+KU9pQOLf1hqkONhH/ba9s6JLsDMEJ81QPagaVbojAc6hO4CKKZXpxqkvB7HudBLFzPh8j91Zo80GHvTtyMQ3HEAzFz3FqNATTD8Mnc5Wh4AhfK1QVNwPkA33aGsRE3xgwHa7QbouEc7l8DKxHs7eg8zO5QZKJ8zf9adZEl2wcl6a1u2LryYGV52gdIBzeeCRfNfNgz53YVegExd2hR71DX6O8+qL4ZkpF0+/PJTS2tI8TSY2vfH1IddnaM7lfj ansible-generated on ip-172-31-42-95" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCipGaBv+3Si4n2w5S9DF0zqbJvdf5HTmLpmXRCAl3ESjuoErb7YGhxkA7bdLXRG/nZwr9bv4mww9YadgJqoIE/95VcWHEQhgENWS9EWhT/v/eIx8afVUlR7szFxR6YAmFfQ/HzB6x3rFo3iZLMOwjDE7McqLG18/iq/KI+rEFcalY9LBGIHiUxcgOhHMJUO0LwMeNPiCXc/6SfRwRPs43eIBW8rVbj/H4D1pHgmSJj44bCFhpU5dFpVsEVlVrEjiBFQr/tq66+ZIF8X3osrrK3qnS64tF7ABwZPm1qqVMbJqM+88cKAot+OH8mzoVWXtQmhzXtV8BTtDxA3Vfa28B ansible-generated on ip-172-31-45-146" >> ~/.ssh/authorized_keys #copy ke semua server
 
 copy output disini
 ec2_private_ips = [
@@ -74,9 +74,6 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.13.2
-sudo su
-sudo echo 1 > /proc/sys/vm/drop_caches
-su serverdevops
 helm install rancher rancher-stable/rancher --namespace cattle-system --set hostname=rnchr.anakdevops.online
 kubectl -n cattle-system get deploy rancher
 kubectl -n cattle-system get deploy rancher -w
@@ -87,6 +84,8 @@ kubectl -n cattle-system get deploy rancher -w
 
 ```
 troubleshoot
+Error: INSTALLATION FAILED: 1 error occurred:
+        * Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": context deadline exceeded
 kubectl scale --replicas=1 deployment rancher -n cattle-system #scale down
 kubectl -n cattle-system get deploy rancher -w
 sudo echo 1 > /proc/sys/vm/drop_caches
