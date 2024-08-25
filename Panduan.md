@@ -81,13 +81,13 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 ```
 Node 2
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@54.169.212.222
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.128.255.251
 sudo su
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3Uf0MKMuPWsRg2ph5ov0SSh1K4iwypNXjTgmwG9l4t2g6rMMBjzLNZAODsohOZDhw+DiwFnr/gN+DDpS7llilMPMRaJ1u9BjcVjURJuZy9f+cmPqPH3rCRi8cRja58JMJZe8551FPyRTNeOcYpauERhRCmxjM+4X6TLDjC1qdHRGvWcoiD/VY9zILy3p55qShRCH9dDINaCRxrbwB6MgudxsoWCmuTOef65loDoTWWiB+SjLiLadnBwApk10icxz9p/JbCZ5ifFlqZtM20feYcEG6dj4bRaIfsqcYIezcDbbdFJ3JGKCa0k/ji5aROfuX9E+kP0VovJt5s+T4fEJL ansible-generated on ip-172-31-45-70" >> ~/.ssh/authorized_keys
-ssh serverdevops@172.31.30.54
-ssh serverdevops@172.31.45.70
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgWh6tTRhNknDHZsBP7D9IThYU21igkqHgqeKFHmTJn3ua3VDg73GudNFgH3bC4xhaliT1AwIOaQlrvYTtwdQvnZlMethqMGOObFpvLjfOttt7UKfH71xCDpAswIrCDEvUXyBDo5/p5RkqRecUZw4WDuxtKABCqzuguxCAWRMexizNmr4h7nliFe1u/1ViASNTRrdTHppQbAjEZGhJjfTx+nkQbcImMbUGcTu1uhOQvp/0Hnn74D1DKANl0EepbC5TiFnlmvgS1mvrSaU9MdVV4Itb05EfLTRVdXHN85ipPnx0KuLtAxUy9M0FiB/vw60kOwAaR3kH3UnSj8LX42QB ansible-generated on ip-172-31-45-125" >> ~/.ssh/authorized_keys
+ssh serverdevops@172.31.20.215
+ssh serverdevops@172.31.45.125
 ```
 
 ```
