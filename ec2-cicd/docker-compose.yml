@@ -1,0 +1,33 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:17.0.6-ce.0
+    container_name: gitlab
+    hostname: 'git.anakdevops.online'  # Use a placeholder domain
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://git.anakdevops.online'  # Set the external URL without HTTPS
+        gitlab_rails['gitlab_shell_ssh_port'] = 223
+    ports:
+      - '8081:80'  # Expose GitLab on port 80
+      - '223:22'  # SSH port
+    volumes:
+      - /mnt/s3-bucket/config-gitlab:/etc/gitlab
+      - /mnt/s3-bucket/logs-gitlab:/var/log/gitlab
+      - /mnt/s3-bucket/data-gitlab:/var/opt/gitlab
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    hostname: 'jenkins.anakdevops.online'
+    environment:
+      JENKINS_OPTS: '--httpPort=8080'
+    ports:
+      - '8080:8080'  # Jenkins listens on port 8080 by default
+    volumes:
+      - /mnt/s3-bucket/jenkins_home:/var/jenkins_home
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /tmp/nginx.conf:/etc/nginx/nginx.conf

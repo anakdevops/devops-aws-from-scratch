@@ -69,6 +69,30 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
     }
   }
 
+    provisioner "file" {
+    source      = "docker-compose.yml"
+    destination = "/tmp/docker-compose.yml"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("../security_groups/keypair_anakdevops.pem")
+      host        = self.public_ip
+    }
+  }
+
+    provisioner "file" {
+    source      = "nginx.conf"
+    destination = "/tmp/nginx.conf"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("../security_groups/keypair_anakdevops.pem")
+      host        = self.public_ip
+    }
+  }
+
   tags = {
     Name = "ec2_anakdevops_cicd-${count.index}"
   }
@@ -88,6 +112,8 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
               echo "${data.terraform_remote_state.security_groups.outputs.key_public_key}" >> ~/.ssh/authorized_keys
               chmod 600 ~/.ssh/authorized_keys
               sudo ansible-playbook /tmp/install.yaml
+              cd /tmp
+              docker compose up -d
               EOF
 }
 
