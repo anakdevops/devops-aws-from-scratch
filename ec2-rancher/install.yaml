@@ -180,12 +180,6 @@
                 - controlplane
                 - etcd
                 - worker
-            - address: 172.31.34.155
-              user: serverdevops
-              role:
-                - controlplane
-                - etcd
-                - worker
           ingress:
             provider: nginx
             options:

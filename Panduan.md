@@ -11,18 +11,18 @@
 
 ```
 ec2_private_ips = [
-  "172.31.20.196", #node 1
-  "172.31.42.29",  #node 2
+  "172.31.20.215",
+  "172.31.45.125",
 ]
 ec2_public_ips = [
-  "13.229.123.200",
-  "13.229.238.30",
+  "18.138.248.185",
+  "47.128.255.251",
 ]
 ec2_private_ips = [
-  "172.31.21.72",
+  "172.31.44.116",
 ]
 ec2_public_ips = [
-  "54.179.46.197",
+  "13.250.118.217",
 ]
 ```
 
@@ -32,21 +32,22 @@ ec2_public_ips = [
 
 ```
 Node 1
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.215.201.93
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@18.138.248.185
 sudo su
 rke config -l
 rke -v
 rke config --list-version --all
-ll /home/serverdevops/cluster.yml
+ll /home/serverdevops/cluster.yml #pastikan file sudah ada
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCep2SOYMefqD3rG3GDXoOVAQEAPjg5Es0r4Zm0huU3LqQBDDZA34Q8jcK5XGlvk5o/8wLUMc9TT+jYqj7hI9S0bZd3xKRFdeTpFPkQTIKzjaZSWaSJxbLTXLcK4efJhGiOHt0N0FWRP/O87NROUweCXGb7MDla9nG16kRctyYHKrvQZUhH2DayJSe+WXx8NBhXWyr1RoDIqhZ1yZlc2x5Yw1vX+WPGnXWJP593JrvyPCfudkEyZPx/JOpU8sEvfVl9GuMqtkW+JSkddfs1Od46jVQWU8SkzUrKBi/j8pHDjzNZZL3kqCzAGJWTOfZf+qUF8njFu1XFypAFMHg1Yq9T ansible-generated on ip-172-31-30-54" >> ~/.ssh/authorized_keys
-ssh serverdevops@172.31.20.196
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCTf6T6DPcXF44S9JRHUBqANFqBmlGXMJ5GNjW5dN9fxvR3tNUkYisp1J7bTOny10EAKs2GPog8fCiI1JRJnn4wuWhFfTsBWWPOG+7p6bEM2JPq+G2qVCJirLxcft0e5lud7+P6+D3T7i8B4xxDNpqjcuYshfZYKQGd3qoU5EmLStCgKSq1QwWrXjeTsbNYMTE79OVObxHW+++3XUla9ClEy2QfimT8fhzdvQqV516fXE4zR7l2Zt8fKGlV0xIlRnH5E9YJGaWcjWwWU2mgDqetuRUDXhPTiNgkyO6biyRCul6wIAhMTcHstZgUUWAT0HtYuEoaoQP6LnLVytuZtRb ansible-generated on ip-172-31-20-215" >> ~/.ssh/authorized_keys
+ssh serverdevops@172.31.20.215
+exit
 docker --version
 docker compose version
 helm version
 cd /home/serverdevops/
-nano cluster.yml
+nano cluster.yml #sesuaikan IP
 rke up --config cluster.yml
 INFO[0176] Finished building Kubernetes cluster successfully
 export KUBECONFIG=$HOME/kube_config_cluster.yml
@@ -56,7 +57,6 @@ kubectl get nodes
 # Dashboard Rancher
 
 ```
-sudo su
 cd /mnt/s3-bucket
 chmod +x dashboard_rancher.sh
 ./dashboard_rancher.sh
@@ -64,6 +64,16 @@ kubectl -n cattle-system get deploy rancher -w #Pastikan semua pod sudah berjala
 akses https://rnchr.anakdevops.online
 ```
 
+# ARGOCD
+
+
+```
+helm repo add argo https://argoproj.github.io/argo-helm
+helm repo update
+helm install argocd argo/argo-cd --namespace argocd --create-namespace --set server.service.type=NodePort --set server.service.nodePort=31432
+akses argocd.anakdevops.online
+kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
 
 # Add Node | RKE v 1.6.1 | Upgrade Kubernetes v1.27.16 to v1.28.12 (v1.28.12-rancher1-1) | rancher v2.8.5
 
