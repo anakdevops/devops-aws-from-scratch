@@ -54,3 +54,8 @@ chmod +x destroy_terraform.sh
 cd {folder}
 terraform destroy -var-file="../terraform.tfvars" -auto-approve
 ```
+
+
+```
+tail -f /var/log/cloud-init-output.log
+```
