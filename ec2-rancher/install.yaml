@@ -186,10 +186,10 @@
                 - controlplane
                 - etcd
                 - worker
-          network:
-            plugin: calico
-            calico_network_provider:
-              cloud_provider: aws
+          ingress:
+            provider: nginx
+            options:
+              use-forwarded-headers: "true"
           kubernetes_version: "v1.27.16-rancher1-1"
     - name: Set owner and group for cluster.yml
       file:

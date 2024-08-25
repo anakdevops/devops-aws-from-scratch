@@ -26,3 +26,11 @@ resource "aws_s3_object" "example_file" {
   source = "nginx.conf"  # Path to your local file
   acl    = "private"
 }
+
+resource "aws_s3_object" "example_file" {
+  bucket = aws_s3_bucket.my_bucket.bucket
+  key    = "dashboard_rancher.sh"  # Name of the file in S3
+  source = "dashboard_rancher.sh"  # Path to your local file
+  acl    = "private"
+}
+
