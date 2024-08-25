@@ -49,7 +49,7 @@ helm version
 cd /home/serverdevops/
 nano cluster.yml #sesuaikan IP
 rke up --config cluster.yml
-INFO[0176] Finished building Kubernetes cluster successfully
+tunggu sampai Finished building Kubernetes cluster successfully
 export KUBECONFIG=$HOME/kube_config_cluster.yml
 kubectl get nodes
 ```
@@ -58,7 +58,8 @@ kubectl get nodes
 
 ```
 cd /mnt/s3-bucket
-chmod +x dashboard_rancher.sh
+sudo chmod +x dashboard_rancher.sh
+sudo chown serverdevops:serverdevops dashboard_rancher.sh
 ./dashboard_rancher.sh
 kubectl -n cattle-system get deploy rancher -w #Pastikan semua pod sudah berjalan
 akses https://rnchr.anakdevops.online
@@ -70,9 +71,9 @@ akses https://rnchr.anakdevops.online
 ```
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
-helm install argocd argo/argo-cd --namespace argocd --create-namespace --set server.service.type=NodePort --set server.service.nodePort=31432
+helm install argocd argo/argo-cd --namespace argocd --create-namespace --set server.service.type=NodePort
 akses argocd.anakdevops.online
-kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
 # Add Node | RKE v 1.6.1 | Upgrade Kubernetes v1.27.16 to v1.28.12 (v1.28.12-rancher1-1) | rancher v2.8.5
