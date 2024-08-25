@@ -11,7 +11,8 @@ terraform_init() {
 
 
 # Initialize Terraform in all directories
-terraform_init "ec2"
+terraform_init "ec2-rancher"
+terraform_init "ec2-cicd"
 terraform_init "s3"
 terraform_init "security_groups"
 

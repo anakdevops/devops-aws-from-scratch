@@ -11,14 +11,7 @@ terraform_plan() {
   cd - > /dev/null || exit
 }
 
-# Function to apply Terraform
-terraform_apply() {
-  local dir=$1
-  echo "Applying Terraform in directory: $dir"
-  cd "$dir" || exit
-  terraform apply -var-file="../terraform.tfvars" -auto-approve
-  cd - > /dev/null || exit
-}
+
 
 
 
@@ -26,13 +19,9 @@ terraform_apply() {
 
 # Plan Terraform in all directories
 terraform_plan "security_groups"
-terraform_apply "security_groups"
 terraform_plan "s3"
-terraform_plan "ec2"
-
-# Apply Terraform in all directories
-terraform_apply "s3"
-terraform_apply "ec2"
+terraform_plan "ec2-rancher"
+terraform_plan "ec2-cicd"
 
 
 

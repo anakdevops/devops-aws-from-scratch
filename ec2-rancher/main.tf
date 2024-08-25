@@ -32,13 +32,19 @@ data "terraform_remote_state" "my_bucket" {
   }
 }
 
+# Local values for zones
+locals {
+  zones = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+}
+
 # EC2 instances
 resource "aws_instance" "ec2_anakdevops" {
   count                  = 2
   ami                    = "ami-0497a974f8d5dcef8" #22.04.4 LTS (Jammy Jellyfish)
-  instance_type          = "t2.micro"
+  instance_type          = count.index % 2 == 0 ? "t2.large" : "t2.medium"
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id
   vpc_security_group_ids = [data.terraform_remote_state.security_groups.outputs.security_group_id]
+  availability_zone      = local.zones[count.index % length(local.zones)]
   
     root_block_device {
     volume_size = 50

@@ -11,7 +11,8 @@ terraform_destroy() {
 
 
 # Destroy Terraform in all directories
-terraform_destroy "ec2"
+terraform_destroy "ec2-rancher"
+terraform_destroy "ec2-cicd"
 terraform_destroy "s3"
 terraform_destroy "security_groups"
 
