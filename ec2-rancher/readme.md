@@ -1,17 +1,16 @@
-# RKE v 1.6.1 | Kubernetes v1.27.16 | rancher v2.8.5
+# Singe Node | RKE v 1.6.1 | Kubernetes v1.27.16 | rancher v2.8.5
 
 ```
 copy output disini
 ec2_private_ips = [
-  "172.31.42.95",
-  "172.31.45.146",
+  "172.31.30.54",
+  "172.31.45.70",
 ]
 ec2_public_ips = [
-  "13.212.218.25",
-  "47.129.165.231",
+  "13.215.201.93",
+  "54.169.212.222",
 ]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.212.218.25
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@47.129.165.231
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@13.215.201.93
 ```
 
 
@@ -27,17 +26,17 @@ ll /home/serverdevops/cluster.yml #pastikan file sudah ada dan lanjutkan ke peri
 ```
 su serverdevops
 cat /home/serverdevops/.ssh/id_rsa.pub
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZonKwnYWmFI3d6+3kY9sp3U5ZXGd9WR/UN3ZAqa0tKzJG1rhFFFfN7smNjbh0kXTdqHADYZby9Hq6p7ygq02Rm+KU9pQOLf1hqkONhH/ba9s6JLsDMEJ81QPagaVbojAc6hO4CKKZXpxqkvB7HudBLFzPh8j91Zo80GHvTtyMQ3HEAzFz3FqNATTD8Mnc5Wh4AhfK1QVNwPkA33aGsRE3xgwHa7QbouEc7l8DKxHs7eg8zO5QZKJ8zf9adZEl2wcl6a1u2LryYGV52gdIBzeeCRfNfNgz53YVegExd2hR71DX6O8+qL4ZkpF0+/PJTS2tI8TSY2vfH1IddnaM7lfj ansible-generated on ip-172-31-42-95" >> ~/.ssh/authorized_keys #copy ke semua server
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCipGaBv+3Si4n2w5S9DF0zqbJvdf5HTmLpmXRCAl3ESjuoErb7YGhxkA7bdLXRG/nZwr9bv4mww9YadgJqoIE/95VcWHEQhgENWS9EWhT/v/eIx8afVUlR7szFxR6YAmFfQ/HzB6x3rFo3iZLMOwjDE7McqLG18/iq/KI+rEFcalY9LBGIHiUxcgOhHMJUO0LwMeNPiCXc/6SfRwRPs43eIBW8rVbj/H4D1pHgmSJj44bCFhpU5dFpVsEVlVrEjiBFQr/tq66+ZIF8X3osrrK3qnS64tF7ABwZPm1qqVMbJqM+88cKAot+OH8mzoVWXtQmhzXtV8BTtDxA3Vfa28B ansible-generated on ip-172-31-45-146" >> ~/.ssh/authorized_keys #copy ke semua server
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCep2SOYMefqD3rG3GDXoOVAQEAPjg5Es0r4Zm0huU3LqQBDDZA34Q8jcK5XGlvk5o/8wLUMc9TT+jYqj7hI9S0bZd3xKRFdeTpFPkQTIKzjaZSWaSJxbLTXLcK4efJhGiOHt0N0FWRP/O87NROUweCXGb7MDla9nG16kRctyYHKrvQZUhH2DayJSe+WXx8NBhXWyr1RoDIqhZ1yZlc2x5Yw1vX+WPGnXWJP593JrvyPCfudkEyZPx/JOpU8sEvfVl9GuMqtkW+JSkddfs1Od46jVQWU8SkzUrKBi/j8pHDjzNZZL3kqCzAGJWTOfZf+qUF8njFu1XFypAFMHg1Yq9T ansible-generated on ip-172-31-30-54" >> ~/.ssh/authorized_keys #copy ke semua server
+
 
 copy output disini
 ec2_private_ips = [
-  "172.31.39.11",
-  "172.31.44.115",
+  "172.31.30.54",
+  "172.31.45.70",
 ]
 ec2_public_ips = [
-  "47.129.249.57",
-  "13.229.55.139",
+  "13.215.201.93",
+  "54.169.212.222",
 ]
 ssh serverdevops@172.31.39.11
 ssh serverdevops@172.31.44.115
@@ -79,7 +78,30 @@ kubectl -n cattle-system get deploy rancher
 kubectl -n cattle-system get deploy rancher -w
 ```
 
+# Add Node | RKE v 1.6.1 | Upgrade Kubernetes v1.27.16 to v1.28.12 (v1.28.12-rancher1-1) | rancher v2.8.5
 
+
+```
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@54.169.212.222
+sudo su
+su serverdevops
+cat /home/serverdevops/.ssh/id_rsa.pub
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3Uf0MKMuPWsRg2ph5ov0SSh1K4iwypNXjTgmwG9l4t2g6rMMBjzLNZAODsohOZDhw+DiwFnr/gN+DDpS7llilMPMRaJ1u9BjcVjURJuZy9f+cmPqPH3rCRi8cRja58JMJZe8551FPyRTNeOcYpauERhRCmxjM+4X6TLDjC1qdHRGvWcoiD/VY9zILy3p55qShRCH9dDINaCRxrbwB6MgudxsoWCmuTOef65loDoTWWiB+SjLiLadnBwApk10icxz9p/JbCZ5ifFlqZtM20feYcEG6dj4bRaIfsqcYIezcDbbdFJ3JGKCa0k/ji5aROfuX9E+kP0VovJt5s+T4fEJL ansible-generated on ip-172-31-45-70" >> ~/.ssh/authorized_keys #copy ke semua server
+ssh serverdevops@172.31.30.54
+ssh serverdevops@172.31.45.70
+```
+
+```
+Node 1
+```
+cd /home/serverdevops/
+nano cluster.yml #tambahkan ip node 2
+jalankan di server 1
+rke up --config cluster.yml
+INFO[0176] Finished building Kubernetes cluster successfully
+export KUBECONFIG=$HOME/kube_config_cluster.yml
+kubectl get nodes
+```
 
 
 ```
