@@ -11,9 +11,9 @@ services:
       - '8081:80'  # Expose GitLab on port 80
       - '223:22'  # SSH port
     volumes:
-      - /mnt/s3-bucket/config-gitlab:/etc/gitlab
-      - /mnt/s3-bucket/logs-gitlab:/var/log/gitlab
-      - /mnt/s3-bucket/data-gitlab:/var/opt/gitlab
+      - ./config-gitlab:/etc/gitlab
+      - ./logs-gitlab:/var/log/gitlab
+      - ./data-gitlab:/var/opt/gitlab
   jenkins:
     image: jenkins/jenkins:lts
     container_name: jenkins

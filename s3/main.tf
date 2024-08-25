@@ -15,6 +15,6 @@ provider "aws" {
 
 # Define S3 bucket resource first
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "buc345ketpython435we"
+  bucket = "data-s3-anakdevops"
   force_destroy = true
 }

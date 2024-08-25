@@ -58,4 +58,6 @@ terraform destroy -var-file="../terraform.tfvars" -auto-approve
 
 ```
 tail -f /var/log/cloud-init-output.log
+docker logs -f gitlab
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
