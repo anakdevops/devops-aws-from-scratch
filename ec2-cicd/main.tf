@@ -36,7 +36,7 @@ data "terraform_remote_state" "my_bucket" {
 resource "aws_instance" "ec2_anakdevops_cicd" {
   count                  = 1
   ami                    = "ami-0497a974f8d5dcef8" #22.04.4 LTS (Jammy Jellyfish)
-  instance_type          = "t2.xlarge"
+  instance_type          = "t3.xlarge"
   key_name               = data.terraform_remote_state.security_groups.outputs.key_pair_id
   vpc_security_group_ids = [data.terraform_remote_state.security_groups.outputs.security_group_id]
   
