@@ -116,6 +116,7 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
               sudo chmod 777 -R /mnt/s3-bucket/data-jenkins/jenkins_home
               cd /tmp
               docker compose up -d
+              sudo chmod 777 -R /mnt/s3-bucket/data-jenkins/jenkins_home/
               EOF
 }
 
