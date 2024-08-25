@@ -28,7 +28,7 @@ ec2_public_ips = [
 
 
 
-# Singe Node | RKE v 1.6.1 | Kubernetes v1.27.16 | rancher v2.8.5
+# Single Node | RKE v 1.6.1 | Kubernetes v1.27.16 | rancher v2.8.5
 
 ```
 Node 1
