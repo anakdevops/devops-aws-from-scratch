@@ -64,9 +64,11 @@ terraform destroy -var-file="../terraform.tfvars" -auto-approve
 
 
 ```
+edit nginx.conf
 tail -f /var/log/cloud-init-output.log
 akses http://jenkins.anakdevops.online/
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+akses http://git.anakdevops.online/
 docker logs -f gitlab
 sudo docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
