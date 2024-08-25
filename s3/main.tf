@@ -27,7 +27,7 @@ resource "aws_s3_object" "example_file" {
   acl    = "private"
 }
 
-resource "aws_s3_object" "example_file" {
+resource "aws_s3_object" "example_file1" {
   bucket = aws_s3_bucket.my_bucket.bucket
   key    = "dashboard_rancher.sh"  # Name of the file in S3
   source = "dashboard_rancher.sh"  # Path to your local file
