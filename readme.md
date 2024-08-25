@@ -23,11 +23,18 @@ terraform init
 
 
 
-# Create
+# Plan
 
 ```
-chmod +x manage_terraform.sh
-./manage_terraform.sh
+chmod +x plan_terraform.sh
+./plan_terraform.sh
+```
+
+# Apply
+
+```
+chmod +x apply_terraform.sh
+./apply_terraform.sh
 ```
 
 # OR
