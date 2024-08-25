@@ -106,8 +106,6 @@ kubectl get nodes
 
 ```
 troubleshoot
-Error: INSTALLATION FAILED: 1 error occurred:
-        * Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": context deadline exceeded
 kubectl scale --replicas=1 deployment rancher -n cattle-system #scale down
 kubectl -n cattle-system get deploy rancher -w
 sudo echo 1 > /proc/sys/vm/drop_caches
