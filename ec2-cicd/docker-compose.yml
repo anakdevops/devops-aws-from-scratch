@@ -23,7 +23,7 @@ services:
     ports:
       - '8080:8080'  # Jenkins listens on port 8080 by default
     volumes:
-      - /mnt/s3-bucket/jenkins_home:/var/jenkins_home
+      - /mnt/s3-bucket/data-jenkins/jenkins_home:/var/jenkins_home
   nginx:
     image: nginx:latest
     container_name: nginx-proxy

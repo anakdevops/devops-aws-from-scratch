@@ -112,6 +112,8 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
               echo "${data.terraform_remote_state.security_groups.outputs.key_public_key}" >> ~/.ssh/authorized_keys
               chmod 600 ~/.ssh/authorized_keys
               sudo ansible-playbook /tmp/install.yaml
+              sudo mkdir -p /mnt/s3-bucket/data-jenkins
+              sudo chmod 777 -R /mnt/s3-bucket/data-jenkins
               cd /tmp
               docker compose up -d
               EOF
