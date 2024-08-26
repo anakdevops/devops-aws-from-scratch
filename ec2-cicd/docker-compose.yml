@@ -30,4 +30,5 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /mnt/s3-bucket/nginx.conf:/etc/nginx/nginx.conf
+      - /mnt/s3-bucket/aplikasi.anakdevops.online.conf:/etc/nginx/aplikasi.anakdevops.online.conf
+      - /tmp/nginxcert:/etc/nginx/certs

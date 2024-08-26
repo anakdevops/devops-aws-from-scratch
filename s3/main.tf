@@ -22,8 +22,8 @@ resource "aws_s3_bucket" "my_bucket" {
 # Define S3 bucket object resource for uploading a file
 resource "aws_s3_object" "example_file" {
   bucket = aws_s3_bucket.my_bucket.bucket
-  key    = "nginx.conf"  # Name of the file in S3
-  source = "nginx.conf"  # Path to your local file
+  key    = "aplikasi.anakdevops.online.conf"  # Name of the file in S3
+  source = "aplikasi.anakdevops.online.conf"  # Path to your local file
   acl    = "private"
 }
 

@@ -81,17 +81,6 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
     }
   }
 
-    provisioner "file" {
-    source      = "nginx.conf"
-    destination = "/tmp/nginx.conf"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("../security_groups/keypair_anakdevops.pem")
-      host        = self.public_ip
-    }
-  }
 
   tags = {
     Name = "ec2_anakdevops_cicd-${count.index}"
@@ -100,7 +89,7 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
   user_data = <<-EOF
               #!/bin/bash
               sudo apt-get update
-              sudo apt-get install -y s3fs curl git ansible
+              sudo apt-get install -y s3fs curl git ansible wget libnss3-tools
               echo "${var.access_key}:${var.secret_key}" > /etc/passwd-s3fs
               sudo chown root:root /etc/passwd-s3fs
               sudo chmod 600 /etc/passwd-s3fs
@@ -108,6 +97,12 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
               echo "s3fs#${data.terraform_remote_state.my_bucket.outputs.bucket_name} /mnt/s3-bucket fuse _netdev,allow_other 0 0" | sudo tee -a /etc/fstab
               sudo systemctl daemon-reload
               sudo mount -a
+              sudo mkdir -p /tmp/nginxcert
+              sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
+              sudo mv mkcert-v1.4.3-linux-amd64 /usr/bin/mkcert
+              sudo chmod +x /usr/bin/mkcert
+              cd /tmp/nginxcert
+              sudo mkcert -cert-file aplikasi.anakdevops.online.crt -key-file aplikasi.anakdevops.online.key aplikasi.anakdevops.online
               mkdir -p ~/.ssh
               echo "${data.terraform_remote_state.security_groups.outputs.key_public_key}" >> ~/.ssh/authorized_keys
               chmod 600 ~/.ssh/authorized_keys
