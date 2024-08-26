@@ -7,7 +7,38 @@
 ./output_terraform.sh
 ```
 
-# IP All ec2
+# Masukan ip public ke dns manager domain
+
+```
+46.137.236.28 aplikasi.anakdevops.online
+```
+![image](dnsmanager.png)
+
+periksa apakah domain sudah sesuai
+![image](dnspro.png)
+
+# IP ec2 cicd
+
+```
+ec2_private_ips = [
+  "172.31.38.235",
+]
+ec2_public_ips = [
+  "46.137.236.28",
+]
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@46.137.236.28
+sudo su
+docker ps -a #pastikan container sudah berjalan dan status gitlab healthy
+edit pada /mnt/s3-bucket/aplikasi.anakdevops.online.conf
+nano /mnt/s3-bucket/aplikasi.anakdevops.online.conf
+    upstream aplikasi_backend {
+    server 172.31.46.181:8081;
+  } 
+docker restart nginx-proxy #restart container nginx
+```
+
+
+# IP ec2 rancher
 
 ```
 ec2_private_ips = [
@@ -17,12 +48,6 @@ ec2_private_ips = [
 ec2_public_ips = [
   "18.138.248.185",
   "47.128.255.251",
-]
-ec2_private_ips = [
-  "172.31.44.116",
-]
-ec2_public_ips = [
-  "13.250.118.217",
 ]
 ```
 
