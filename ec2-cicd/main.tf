@@ -103,6 +103,7 @@ resource "aws_instance" "ec2_anakdevops_cicd" {
               sudo chmod +x /usr/bin/mkcert
               cd /tmp/nginxcert
               sudo mkcert -cert-file aplikasi.anakdevops.online.crt -key-file aplikasi.anakdevops.online.key aplikasi.anakdevops.online
+              sudo mkcert -install
               mkdir -p ~/.ssh
               echo "${data.terraform_remote_state.security_groups.outputs.key_public_key}" >> ~/.ssh/authorized_keys
               chmod 600 ~/.ssh/authorized_keys

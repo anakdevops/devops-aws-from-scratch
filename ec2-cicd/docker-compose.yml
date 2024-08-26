@@ -29,6 +29,7 @@ services:
     container_name: nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - /mnt/s3-bucket/aplikasi.anakdevops.online.conf:/etc/nginx/aplikasi.anakdevops.online.conf
+      - /mnt/s3-bucket/aplikasi.anakdevops.online.conf:/etc/nginx/nginx.conf
       - /tmp/nginxcert:/etc/nginx/certs
