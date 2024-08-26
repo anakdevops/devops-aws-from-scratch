@@ -140,7 +140,7 @@ sudo su
 docker ps -a #pastikan container sudah berjalan dan status gitlab healthy
 edit pada /mnt/s3-bucket/aplikasi.anakdevops.online.conf masukan ip private
 nano /mnt/s3-bucket/aplikasi.anakdevops.online.conf
-    upstream aplikasi_backend {
+    upstream git_backend {
     server 172.31.46.181:8081;
   } 
 docker restart nginx-proxy #restart container nginx
@@ -149,13 +149,13 @@ docker restart nginx-proxy #restart container nginx
 # Masukan ip public ke dns manager domain
 
 ```
-46.137.236.28 aplikasi.anakdevops.online
+46.137.236.28 git.anakdevops.online
 ```
 ![image](dnsmanager.png)
 
 periksa apakah domain sudah sesuai
 ![image](dnspro.png)
-akses https://aplikasi.anakdevops.online
+akses https://git.anakdevops.online
 
 
 
