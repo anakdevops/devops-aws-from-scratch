@@ -62,7 +62,7 @@ kubectl -n cattle-system get deploy rancher -w #Pastikan semua pod sudah berjala
 # Masukan ip public ke dns manager domain
 
 ```
-46.137.236.28 aplikasi.anakdevops.online
+46.137.236.28 rnchr.anakdevops.online
 ```
 
 ![image](dnsmanager.png)
@@ -81,8 +81,22 @@ akses https://rnchr.anakdevops.online
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 helm install argocd argo/argo-cd --namespace argocd --create-namespace --set server.service.type=NodePort
-akses argocd.anakdevops.online
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+# Masukan ip public ec2 cicd ke dns manager domain
+
+```
+46.137.236.28 argocd.anakdevops.online
+```
+
+![image](dnsmanager.png)
+
+periksa apakah domain sudah sesuai
+![image](dnspro.png)
+
+```
+akses https://argocd.anakdevops.online
 ```
 
 # Add Node | RKE v 1.6.1 | Upgrade Kubernetes v1.27.16 to v1.28.12 (v1.28.12-rancher1-1) | rancher v2.8.5
