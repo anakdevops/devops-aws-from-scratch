@@ -7,36 +7,6 @@
 ./output_terraform.sh
 ```
 
-# Masukan ip public ke dns manager domain
-
-```
-46.137.236.28 aplikasi.anakdevops.online
-```
-![image](dnsmanager.png)
-
-periksa apakah domain sudah sesuai
-![image](dnspro.png)
-
-# IP ec2 cicd
-
-```
-ec2_private_ips = [
-  "172.31.38.235",
-]
-ec2_public_ips = [
-  "46.137.236.28",
-]
-ssh -i security_groups/keypair_anakdevops.pem ubuntu@46.137.236.28
-sudo su
-docker ps -a #pastikan container sudah berjalan dan status gitlab healthy
-edit pada /mnt/s3-bucket/aplikasi.anakdevops.online.conf
-nano /mnt/s3-bucket/aplikasi.anakdevops.online.conf
-    upstream aplikasi_backend {
-    server 172.31.46.181:8081;
-  } 
-docker restart nginx-proxy #restart container nginx
-```
-
 
 # IP ec2 rancher
 
@@ -87,6 +57,20 @@ sudo chmod +x dashboard_rancher.sh
 sudo chown serverdevops:serverdevops dashboard_rancher.sh
 ./dashboard_rancher.sh
 kubectl -n cattle-system get deploy rancher -w #Pastikan semua pod sudah berjalan
+```
+
+# Masukan ip public ke dns manager domain
+
+```
+46.137.236.28 aplikasi.anakdevops.online
+```
+
+![image](dnsmanager.png)
+
+periksa apakah domain sudah sesuai
+![image](dnspro.png)
+
+```
 akses https://rnchr.anakdevops.online
 ```
 
@@ -126,6 +110,39 @@ export KUBECONFIG=$HOME/kube_config_cluster.yml
 kubectl get nodes
 akses https://rnchr.anakdevops.online
 ```
+
+
+# IP ec2 cicd
+
+```
+ec2_private_ips = [
+  "172.31.38.235",
+]
+ec2_public_ips = [
+  "46.137.236.28",
+]
+ssh -i security_groups/keypair_anakdevops.pem ubuntu@46.137.236.28
+sudo su
+docker ps -a #pastikan container sudah berjalan dan status gitlab healthy
+edit pada /mnt/s3-bucket/aplikasi.anakdevops.online.conf masukan ip private
+nano /mnt/s3-bucket/aplikasi.anakdevops.online.conf
+    upstream aplikasi_backend {
+    server 172.31.46.181:8081;
+  } 
+docker restart nginx-proxy #restart container nginx
+```
+
+# Masukan ip public ke dns manager domain
+
+```
+46.137.236.28 aplikasi.anakdevops.online
+```
+![image](dnsmanager.png)
+
+periksa apakah domain sudah sesuai
+![image](dnspro.png)
+akses https://aplikasi.anakdevops.online
+
 
 
 
